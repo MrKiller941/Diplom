@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+
+  mongodb:
+        image: dockerhub.timeweb.cloud/library/mongo:7.0.6
+        container_name: mongodb
+        restart: always
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+          MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+          MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+          MONGO_REPLICA_SET_NAME: rs0
+        volumes:
+            - "data_db:/data/db:rw"
+            - ./mongodb/keys/:/opt/keyfile/
+        ports:
+            - "${MONGO_INITDB_PORT}:27017"
+        entrypoint:
+            - bash
+            - -c
+            - |
+                chmod 400 /opt/keyfile/keyfile
+                chown 999:999 /opt/keyfile/keyfile
+                exec docker-entrypoint.sh $$@
+        command: "mongod --bind_ip_all --keyFile /opt/keyfile/keyfile --replSet rs0"
+
+  app:
+    container_name: app
+    restart: always
+    build:
+      context: ./..
+      dockerfile: deployments/app/Dockerfile
+    depends_on:
+      - mongodb
+    # command: ["python", "main.py"]
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "${APP_PORT}", "--reload"]
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    volumes:
+      - "../app:/usr/app:rw"
+    environment:
+      PROJECT_NAME: ${APP_PROJECT_NAME}
+      SECRET_KEY: ${APP_SECRET_KEY}
+      DEBUG: ${APP_DEBUG}
+      PORT: ${APP_PORT}
+
+      MONGODB_NAME: ${MONGO_INITDB_DATABASE}
+      MONGODB_PORT: ${MONGO_INITDB_PORT}
+      MONGODB_HOST: mongodb
+
+      MONGODB_USER: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGODB_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
+      EMAIL_HOST: ${APP_EMAIL_HOST}
+      EMAIL_PORT: ${APP_EMAIL_PORT} 
+      EMAIL_HOST_USER: ${APP_EMAIL_HOST_USER} 
+      EMAIL_HOST_PASSWORD: ${APP_EMAIL_HOST_PASSWORD} 
+      EMAIL_DEFAULT_FROM_EMAIL: ${APP_EMAIL_DEFAULT_FROM_EMAIL} 
+
+      REFRESH_TOKEN_EXPIRE_DAYS: ${APP_REFRESH_TOKEN_EXPIRE_DAYS}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${APP_ACCESS_TOKEN_EXPIRE_MINUTES}
+
+
+volumes:
+  data_db:
+    name: mongodb_data_db

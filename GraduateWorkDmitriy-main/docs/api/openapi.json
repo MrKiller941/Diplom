@@ -1,0 +1,1786 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "GraduateWork",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/api/v1/users": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create",
+                "operationId": "create_api_v1_users_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateUserSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Remove",
+                "operationId": "remove_api_v1_users_delete",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/users/change_password": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Change Password",
+                "operationId": "change_password_api_v1_users_change_password_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangePasswordUserSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/users/confirm_email": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Confirm Email",
+                "operationId": "confirm_email_api_v1_users_confirm_email_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConfirmEmailSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "operationId": "login_api_v1_auth_login_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TokenJWTSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "operationId": "logout_api_v1_auth_logout_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh",
+                "operationId": "refresh_api_v1_auth_refresh_post",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TokenJWTSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTRefreshBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/forecasts": {
+            "get": {
+                "tags": [
+                    "Forecast"
+                ],
+                "summary": "Get List History",
+                "operationId": "get_list_history_api_v1_forecasts_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultForecastListSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Forecast"
+                ],
+                "summary": "Train Test",
+                "operationId": "train_test_api_v1_forecasts_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TrainTestDataSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultWebSocketForecastSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/forecasts/{forecast_id}": {
+            "get": {
+                "tags": [
+                    "Forecast"
+                ],
+                "summary": "Get Detail History",
+                "operationId": "get_detail_history_api_v1_forecasts__forecast_id__get",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "forecast_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "title": "Forecast Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultForecastSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/anomalies": {
+            "get": {
+                "tags": [
+                    "Anomaly"
+                ],
+                "summary": "Get List History",
+                "operationId": "get_list_history_api_v1_anomalies_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultAnomalyListSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Anomaly"
+                ],
+                "summary": "Train Test",
+                "operationId": "train_test_api_v1_anomalies_post",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AnomalyTrainTestDataSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultWebSocketAnomalySchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/anomalies/{anomaly_id}": {
+            "get": {
+                "tags": [
+                    "Anomaly"
+                ],
+                "summary": "Get Detail History",
+                "operationId": "get_detail_history_api_v1_anomalies__anomaly_id__get",
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "anomaly_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "title": "Anomaly Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultAnomalySchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/datasets": {
+            "get": {
+                "tags": [
+                    "Dataset"
+                ],
+                "summary": "Get User Datasets",
+                "operationId": "get_user_datasets_api_v1_datasets_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListDatasetsSchema"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Dataset"
+                ],
+                "summary": "Upload Dataset",
+                "operationId": "upload_dataset_api_v1_datasets_post",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Body_upload_dataset_api_v1_datasets_post"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DatasetSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AlgorithmAnomaly": {
+                "type": "string",
+                "enum": [
+                    "DefaultDetector",
+                    "ArimaDetector",
+                    "DynamicBaseline",
+                    "IsolationForest",
+                    "ETSDetector",
+                    "MSESDetector",
+                    "ProphetDetector",
+                    "RandomCutForest",
+                    "SarimaDetector",
+                    "WindStats",
+                    "SpectralResidual",
+                    "ZMS",
+                    "DeepPointAnomalyDetector"
+                ],
+                "title": "AlgorithmAnomaly"
+            },
+            "AlgorithmForecast": {
+                "type": "string",
+                "enum": [
+                    "DefaultForecaster",
+                    "Arima",
+                    "LGBMForecaster",
+                    "ETS",
+                    "AutoETS",
+                    "Prophet",
+                    "AutoProphet",
+                    "Sarima",
+                    "VectorAR",
+                    "RandomForestForecaster",
+                    "ExtraTreesForecaster"
+                ],
+                "title": "AlgorithmForecast"
+            },
+            "AnomalyProgressEnum": {
+                "type": "array",
+                "enum": [
+                    [
+                        "Запрос получен.",
+                        5
+                    ],
+                    [
+                        "Файл с датасетом временного ряда найден",
+                        5
+                    ],
+                    [
+                        "Данные из файла загружены.",
+                        20
+                    ],
+                    [
+                        "Обучение детектора аномалий ...",
+                        20
+                    ],
+                    [
+                        "Обучение завершено.",
+                        60
+                    ],
+                    [
+                        "Вычисление показателей эффективности обучения...",
+                        70
+                    ],
+                    [
+                        "Получение результатов во время тестирования...",
+                        80
+                    ],
+                    [
+                        "Происходит сохранение модели.",
+                        85
+                    ],
+                    [
+                        "Формирование данных для ответа.",
+                        90
+                    ],
+                    [
+                        "Сохранение в БД успешно произведено. Ждите результат.",
+                        95
+                    ],
+                    [
+                        "Завершено",
+                        100
+                    ]
+                ],
+                "title": "AnomalyProgressEnum"
+            },
+            "AnomalyTrainTestDataSchema": {
+                "properties": {
+                    "file_id": {
+                        "title": "File Id"
+                    },
+                    "columns": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Columns",
+                        "example": [
+                            "temp_max"
+                        ]
+                    },
+                    "algorithm": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AlgorithmAnomaly"
+                            }
+                        ],
+                        "example": "DefaultDetector"
+                    },
+                    "algorithm_params": {
+                        "items": {
+                            "$ref": "#/components/schemas/ParamsAlgorithmSchema"
+                        },
+                        "type": "array",
+                        "title": "Algorithm Params",
+                        "default": []
+                    },
+                    "label_column": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Label Column"
+                    },
+                    "train_percentage": {
+                        "type": "integer",
+                        "maximum": 100.0,
+                        "minimum": 10.0,
+                        "title": "Train Percentage",
+                        "example": 80
+                    },
+                    "file_mode": {
+                        "type": "string",
+                        "title": "File Mode",
+                        "default": "single"
+                    },
+                    "test_filename": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Test Filename"
+                    },
+                    "threshold_class": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Threshold Class"
+                    },
+                    "threshold_params": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/ParamsAlgorithmSchema"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Threshold Params"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "file_id",
+                    "columns",
+                    "algorithm",
+                    "train_percentage"
+                ],
+                "title": "AnomalyTrainTestDataSchema"
+            },
+            "Body_upload_dataset_api_v1_datasets_post": {
+                "properties": {
+                    "dataset": {
+                        "type": "string",
+                        "format": "binary",
+                        "title": "Dataset"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "dataset"
+                ],
+                "title": "Body_upload_dataset_api_v1_datasets_post"
+            },
+            "ChangePasswordUserSchema": {
+                "properties": {
+                    "current_password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "title": "Current Password",
+                        "example": "securepassword123"
+                    },
+                    "new_password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "title": "New Password",
+                        "example": "newsecurepassword123"
+                    },
+                    "confirm_new_password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "title": "Confirm New Password",
+                        "example": "newsecurepassword123"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "current_password",
+                    "new_password",
+                    "confirm_new_password"
+                ],
+                "title": "ChangePasswordUserSchema"
+            },
+            "ConfirmEmailSchema": {
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "title": "Email"
+                    },
+                    "otp_code": {
+                        "type": "string",
+                        "title": "Otp Code"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email",
+                    "otp_code"
+                ],
+                "title": "ConfirmEmailSchema"
+            },
+            "CreateUserSchema": {
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "maxLength": 50,
+                        "minLength": 3,
+                        "title": "Username",
+                        "example": "user123"
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "title": "Password",
+                        "example": "securepassword123"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "title": "Email",
+                        "example": "user@example.com"
+                    },
+                    "full_name": {
+                        "type": "string",
+                        "maxLength": 100,
+                        "minLength": 3,
+                        "title": "Full Name",
+                        "example": "Иванов Иван Иванович"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "maxLength": 15,
+                        "minLength": 10,
+                        "title": "Phone Number",
+                        "example": "+79990000000"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "username",
+                    "password",
+                    "email",
+                    "full_name",
+                    "phone_number"
+                ],
+                "title": "CreateUserSchema",
+                "description": "TODO: В будущем можно проверять:\n- правильную форму номера телефона\n- пароль на простоту и т.д."
+            },
+            "DatasetSchema": {
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "example": "665271bff4546cdc3faa2719"
+                    },
+                    "file_name": {
+                        "type": "string",
+                        "title": "File Name",
+                        "example": "example.csv"
+                    },
+                    "columns": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Columns",
+                        "example": [
+                            "date",
+                            "max",
+                            "min"
+                        ]
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "file_name",
+                    "columns",
+                    "created_at"
+                ],
+                "title": "DatasetSchema"
+            },
+            "ForecastProgressEnum": {
+                "type": "array",
+                "enum": [
+                    [
+                        "Запрос получен.",
+                        5
+                    ],
+                    [
+                        "Файл с датасетом найден. Запускается процесс прогнозирования.",
+                        10
+                    ],
+                    [
+                        "Данные из файла загружены.",
+                        20
+                    ],
+                    [
+                        "Модель инициализирована.",
+                        25
+                    ],
+                    [
+                        "Обучение модели началось.",
+                        30
+                    ],
+                    [
+                        "Обучение модели завершено.",
+                        70
+                    ],
+                    [
+                        "Обучающие метрики вычислены.",
+                        75
+                    ],
+                    [
+                        "Тестовые метрики вычислены.",
+                        80
+                    ],
+                    [
+                        "Происходит сохранение модели.",
+                        85
+                    ],
+                    [
+                        "Процесс прогнозирование успешно произведен. Идет сохранение в БД.",
+                        90
+                    ],
+                    [
+                        "Сохранение в БД успешно произведено. Ждите результат.",
+                        95
+                    ],
+                    [
+                        "Завершено",
+                        100
+                    ]
+                ],
+                "title": "ForecastProgressEnum"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ListDatasetsSchema": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/DatasetSchema"
+                        },
+                        "type": "array",
+                        "title": "Data"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data"
+                ],
+                "title": "ListDatasetsSchema"
+            },
+            "LoginSchema": {
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "maxLength": 50,
+                        "minLength": 3,
+                        "title": "Username",
+                        "example": "user123"
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 8,
+                        "title": "Password",
+                        "example": "securepassword123"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "title": "LoginSchema"
+            },
+            "ParamsAlgorithmSchema": {
+                "properties": {
+                    "parametr": {
+                        "type": "string",
+                        "title": "Parametr",
+                        "example": "max_forecast_steps"
+                    },
+                    "value": {
+                        "title": "Value",
+                        "example": "None"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "parametr",
+                    "value"
+                ],
+                "title": "ParamsAlgorithmSchema"
+            },
+            "ResultAnomalyDataListSchema": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    },
+                    "status": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusAnomalyEnum"
+                            }
+                        ],
+                        "default": "success"
+                    },
+                    "train_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Train Metrics"
+                    },
+                    "test_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Test Metrics"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "title": "ResultAnomalyDataListSchema"
+            },
+            "ResultAnomalyListSchema": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/ResultAnomalyDataListSchema"
+                        },
+                        "type": "array",
+                        "title": "Data",
+                        "default": []
+                    }
+                },
+                "type": "object",
+                "title": "ResultAnomalyListSchema"
+            },
+            "ResultAnomalySchema": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    },
+                    "status": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusAnomalyEnum"
+                            }
+                        ],
+                        "default": "success"
+                    },
+                    "train_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Train Metrics"
+                    },
+                    "test_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Test Metrics"
+                    },
+                    "test_ts": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "test_pred": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "test_labels": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "ResultAnomalySchema"
+            },
+            "ResultForecastDataListSchema": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    },
+                    "status": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusForecastEnum"
+                            }
+                        ],
+                        "default": "success"
+                    },
+                    "train_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Train Metrics"
+                    },
+                    "test_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Test Metrics"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "title": "ResultForecastDataListSchema"
+            },
+            "ResultForecastListSchema": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/ResultForecastDataListSchema"
+                        },
+                        "type": "array",
+                        "title": "Data",
+                        "default": []
+                    }
+                },
+                "type": "object",
+                "title": "ResultForecastListSchema"
+            },
+            "ResultForecastSchema": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    },
+                    "status": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusForecastEnum"
+                            }
+                        ],
+                        "default": "success"
+                    },
+                    "train_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Train Metrics"
+                    },
+                    "test_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Test Metrics"
+                    },
+                    "test_ts": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "train_ts": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "exog_ts": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "ResultForecastSchema"
+            },
+            "ResultWebSocketAnomalyDataSchema": {
+                "properties": {
+                    "train_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Train Metrics"
+                    },
+                    "test_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Test Metrics"
+                    },
+                    "test_ts": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "test_pred": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "test_labels": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "ResultWebSocketAnomalyDataSchema"
+            },
+            "ResultWebSocketAnomalySchema": {
+                "properties": {
+                    "status": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusAnomalyEnum"
+                            }
+                        ],
+                        "default": "success"
+                    },
+                    "progress": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/AnomalyProgressEnum"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "detail": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Detail"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    },
+                    "data": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ResultWebSocketAnomalyDataSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "ResultWebSocketAnomalySchema"
+            },
+            "ResultWebSocketForecastDataSchema": {
+                "properties": {
+                    "train_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Train Metrics"
+                    },
+                    "test_metrics": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Test Metrics"
+                    },
+                    "test_ts": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "train_ts": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "exog_ts": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/TimeseriesSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "ResultWebSocketForecastDataSchema"
+            },
+            "ResultWebSocketForecastSchema": {
+                "properties": {
+                    "status": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusForecastEnum"
+                            }
+                        ],
+                        "default": "success"
+                    },
+                    "progress": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ForecastProgressEnum"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "detail": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Detail"
+                    },
+                    "message": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Message"
+                    },
+                    "data": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/ResultWebSocketForecastDataSchema"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "ResultWebSocketForecastSchema"
+            },
+            "StatusAnomalyEnum": {
+                "type": "string",
+                "enum": [
+                    "in_process",
+                    "success",
+                    "error"
+                ],
+                "title": "StatusAnomalyEnum"
+            },
+            "StatusForecastEnum": {
+                "type": "string",
+                "enum": [
+                    "in_process",
+                    "success",
+                    "error"
+                ],
+                "title": "StatusForecastEnum"
+            },
+            "SuccessSchema": {
+                "properties": {
+                    "msg": {
+                        "type": "string",
+                        "title": "Msg",
+                        "example": "Операция прошла успешно"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "msg"
+                ],
+                "title": "SuccessSchema"
+            },
+            "TimeseriesSchema": {
+                "properties": {
+                    "data": {
+                        "anyOf": [
+                            {
+                                "type": "object"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Data"
+                    },
+                    "index": {
+                        "items": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "type": "array",
+                        "title": "Index"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "data",
+                    "index"
+                ],
+                "title": "TimeseriesSchema"
+            },
+            "TokenJWTSchema": {
+                "properties": {
+                    "access_token": {
+                        "type": "string",
+                        "title": "Access Token"
+                    },
+                    "refresh_token": {
+                        "type": "string",
+                        "title": "Refresh Token"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "access_token",
+                    "refresh_token"
+                ],
+                "title": "TokenJWTSchema"
+            },
+            "TrainTestDataSchema": {
+                "properties": {
+                    "file_id": {
+                        "title": "File Id"
+                    },
+                    "target_col": {
+                        "type": "string",
+                        "title": "Target Col",
+                        "example": "temp_max"
+                    },
+                    "algorithm": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AlgorithmForecast"
+                            }
+                        ],
+                        "example": "DefaultForecaster"
+                    },
+                    "algorithm_params": {
+                        "items": {
+                            "$ref": "#/components/schemas/ParamsAlgorithmSchema"
+                        },
+                        "type": "array",
+                        "title": "Algorithm Params"
+                    },
+                    "train_percentage": {
+                        "type": "integer",
+                        "maximum": 100.0,
+                        "minimum": 10.0,
+                        "title": "Train Percentage",
+                        "example": 80
+                    },
+                    "file_mode": {
+                        "type": "string",
+                        "title": "File Mode",
+                        "default": "single"
+                    },
+                    "feature_cols": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Feature Cols"
+                    },
+                    "exog_cols": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Exog Cols"
+                    },
+                    "test_filename": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Test Filename"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "file_id",
+                    "target_col",
+                    "algorithm",
+                    "train_percentage"
+                ],
+                "title": "TrainTestDataSchema"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        },
+        "securitySchemes": {
+            "JWTBearer": {
+                "type": "http",
+                "scheme": "bearer"
+            },
+            "JWTRefreshBearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
